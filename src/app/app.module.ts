@@ -17,6 +17,8 @@ import { ServicesComponent } from './home/services/services.component';
 import { TestimonyComponent } from './home/testimony/testimony.component';
 import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,10 +36,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ServicesComponent,
     TestimonyComponent,
     CourseDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

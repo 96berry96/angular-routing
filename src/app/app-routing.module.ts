@@ -6,6 +6,11 @@ import { ContactComponent } from './contact/contact.component';
 import { CoursesComponent } from './courses/courses.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
+import { PopularComponent } from './home/popular/popular.component';
+import { LoginComponent } from './login/login.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { AuthGauardServiceService } from './services/auth-gauard-service.service';
+import { CanActivate, CanActivateChild, canDeactivate, resolve } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -18,13 +23,26 @@ const routes: Routes = [
     path:'About', component: AboutComponent
   },
   {
-    path:'Contact', component: ContactComponent
+    path:'Contact', 
+    canDeactivate:[canDeactivate],
+    component: ContactComponent
   },
   {
-    path:'Courses', component:CoursesComponent
+    path:'Courses', 
+    resolve:{ courses: resolve},
+    component:CoursesComponent
   },
   {
-    path:'Courses/Course/:id', component:CourseDetailComponent
+    path:'Courses', 
+    canActivateChild: [CanActivateChild],
+    children:[
+       { path: 'Course/:id', component:CourseDetailComponent },
+       { path:'Popular', component:PopularComponent  },
+       { path:'Checkout', component:CheckoutComponent, }
+    ]
+  },
+  {
+    path:'Login', component:LoginComponent
   },
   {
     path:'**', component:NotFoundComponent
@@ -32,7 +50,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {enableTracing: true})
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

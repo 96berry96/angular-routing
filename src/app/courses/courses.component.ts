@@ -22,7 +22,10 @@ export class CoursesComponent implements OnInit{
         this.searchString = data.get('search');
 
         if(this.searchString === undefined || this.searchString === '' || this.searchString === null) {
-          this.AllCourses = this.coursesService.courses;
+          // this.coursesService.getAllcourses().subscribe((data: Course[])=>{
+          //   this.AllCourses = data;
+          // });
+          this.AllCourses = this.activeRoute.snapshot.data['courses'];
         } else {
           this.AllCourses = this.coursesService.courses.filter(c => c.title.toLowerCase().includes(this.searchString.toLowerCase()));
         }
