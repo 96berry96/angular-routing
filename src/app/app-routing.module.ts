@@ -38,7 +38,10 @@ const routes: Routes = [
     children:[
        { path: 'Course/:id', component:CourseDetailComponent },
        { path:'Popular', component:PopularComponent  },
-       { path:'Checkout', component:CheckoutComponent, }
+       { 
+        path:'Checkout', 
+        component:CheckoutComponent, 
+      }
     ]
   },
   {
